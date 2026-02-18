@@ -1,52 +1,45 @@
 # Epics and Stories - Todo App Enhancements
 
-## MVP
+## Epics
+
+### MVP
+- Epic: Task Data Model
+- Epic: Filtered Views
+- Epic: Local Persistence
+
+### Post-MVP
+- Epic: Visual Emphasis
+- Epic: Sorting Enhancements
+
+## Stories
+
+### MVP
 - Epic: Task Data Model
   - Story: Add due date field (optional ISO YYYY-MM-DD)
-    - Acceptance: Tasks accept `dueDate` in `YYYY-MM-DD`; field may be empty.
-    - Technical: Backend `tasks` table keeps `due_date` (DATE); `/api/tasks` endpoints accept/return `due_date`; frontend form stores string as is (no TZ shifts).
   - Story: Add priority field with default P3
-    - Acceptance: When no priority provided, task is stored as `P3`.
-    - Technical: Add `priority TEXT CHECK(priority IN ('P1','P2','P3')) DEFAULT 'P3'` to `tasks`; expose in POST/PUT/GET/PATCH; default in API responses and frontend state.
   - Story: Enforce priority values P1/P2/P3 only
-    - Acceptance: Only `P1`, `P2`, `P3` are persisted/accepted.
-    - Technical: Validate in backend routes; reject others with 400; frontend controls restrict to enum; persist through local storage.
   - Story: Ignore invalid due dates (treat as absent)
-    - Acceptance: Invalid `dueDate` values are discarded and stored as no date.
-    - Technical: Backend validation drops non-ISO dates before insert/update; frontend avoids sending invalid date strings.
   - Story: Require title on task creation
-    - Acceptance: Task creation fails or is blocked when title is empty/whitespace.
-    - Technical: Backend already 400s on missing/blank title; frontend blocks submit and shows error.
 - Epic: Filtered Views
   - Story: Show All view including completed tasks
-    - Acceptance: All view lists both completed and incomplete tasks.
-    - Technical: Frontend fetches all tasks (no filter) and renders completed and incomplete; backend GET supports full list.
   - Story: Show Today view for incomplete tasks due today
-    - Acceptance: Today view lists only incomplete tasks with `dueDate` equal to current date.
-    - Technical: Frontend filters in-memory tasks for `completed === false` and `due_date` === today (local date); backend can return all tasks; client-side filtering acceptable until server filter added.
   - Story: Show Overdue view for incomplete tasks past due
-    - Acceptance: Overdue view lists only incomplete tasks with `dueDate` earlier than current date.
-    - Technical: Frontend filters in-memory tasks for `completed === false` and `due_date` < today; backend can return all tasks; client-side filtering acceptable until server filter added.
 - Epic: Local Persistence
   - Story: Persist tasks with priority and due date locally
-    - Acceptance: Saved tasks retain `title`, `priority`, `dueDate`, `completed` in local storage.
-    - Technical: Extend frontend local storage serialization to include `priority` and `due_date`; keep parity with API shape.
   - Story: Load tasks from local storage on startup
-    - Acceptance: On launch, tasks (with `priority` and `dueDate`) are restored from local storage.
-    - Technical: Frontend bootstrap hydrates tasks from local storage into state before/alongside API fetch.
 
-## Post-MVP
+### Post-MVP
 - Epic: Visual Emphasis
   - Story: Highlight overdue tasks visually
-    - Acceptance: Overdue tasks render with distinct highlighting (e.g., red styling).
-    - Technical: Frontend applies conditional styling when `due_date` < today and not completed.
   - Story: Display color-coded priority badges (red P1, orange P2, gray P3)
-    - Acceptance: Tasks show priority badges with colors red=P1, orange=P2, gray=P3.
-    - Technical: Frontend renders badge per `priority`; map P1→red, P2→orange, P3→gray; ensure legend consistent across list and form.
 - Epic: Sorting Enhancements
   - Story: Sort tasks overdue first, then by priority P1→P3
-    - Acceptance: List order places overdue tasks above others, ordered P1→P3.
-    - Technical: Frontend sorting pipeline: overdue flag desc, priority rank asc (P1<P2<P3); can be client-side; optional backend ORDER BY when ready.
   - Story: Order remaining tasks by due date ascending, undated last
-    - Acceptance: Non-overdue tasks sort by due date ascending, with no-due-date last.
-    - Technical: After applying overdue/priority order, sort remaining by due_date asc with nulls last; keep stable ordering for consistent UI.
+
+## Acceptance Criteria
+
+_Omitted per instruction._
+
+## Technical Requirements
+
+_Omitted per instruction._
