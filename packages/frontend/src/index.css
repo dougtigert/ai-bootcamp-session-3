@@ -11,3 +11,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.priority-option {
+  background: var(--priority-unselected);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.priority-option:hover {
+  transform: translateY(-1px);
+}
+
+.priority-option.selected {
+  background: var(--priority-selected);
+}
