@@ -38,4 +38,25 @@ We are upgrading the basic Todo app (currently title + completed) to support due
 
 ---
 
+## 5. Data Model & Validation (MVP)
+
+- `title`: required.
+- `priority`: `"P1" | "P2" | "P3"`; default `"P3"` if not provided.
+- `dueDate`: optional ISO `YYYY-MM-DD`; invalid values are ignored (treated as absent).
+
+## 6. Filters Behavior
+
+- **All**: shows all tasks, including completed.
+- **Today**: shows only incomplete tasks with `dueDate` equal to the current date.
+- **Overdue**: shows only incomplete tasks with `dueDate` earlier than the current date.
+
+## 7. Visual Design Guidance
+
+- Priority badges: color-coded to distinguish urgency (e.g., red=P1, orange=P2, gray=P3).
+- Overdue highlighting: visually emphasize overdue tasks (e.g., red styling).
+
+## 8. Sorting (Post-MVP)
+
+- Order tasks: overdue first → priority (P1→P3) → due date ascending → undated last.
+
 References: Sept 16 Requirements Meeting (VTT) and Sept 17 Slack confirmations.
