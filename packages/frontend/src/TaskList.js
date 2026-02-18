@@ -5,6 +5,7 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import EventIcon from '@mui/icons-material/Event';
+import FlagIcon from '@mui/icons-material/Flag';
 
 function TaskList({ onEdit }) {
   const [tasks, setTasks] = useState([]);
@@ -124,7 +125,7 @@ function TaskList({ onEdit }) {
           </Box>
         )}
         {tasks.map((task, index) => (
-          <ListItem 
+            <ListItem 
             key={task.id} 
             sx={{ 
               pr: 18,
@@ -203,6 +204,27 @@ function TaskList({ onEdit }) {
                 gap: 1
               }}
             >
+              {task.priority && (
+                <Chip
+                  icon={<FlagIcon sx={{ fontSize: 14 }} />}
+                  label={task.priority}
+                  size="small"
+                  sx={{
+                    height: 20,
+                    fontSize: '0.7rem',
+                    fontWeight: 700,
+                    background: task.priority === 'P1'
+                      ? 'linear-gradient(135deg, #e53935 0%, #d32f2f 100%)'
+                      : task.priority === 'P2'
+                        ? 'linear-gradient(135deg, #fb8c00 0%, #ef6c00 100%)'
+                        : 'linear-gradient(135deg, #9e9e9e 0%, #757575 100%)',
+                    color: 'white',
+                    '& .MuiChip-icon': {
+                      color: 'white'
+                    }
+                  }}
+                />
+              )}
               {task.due_date && (
                 <Chip
                   icon={<EventIcon sx={{ fontSize: 14 }} />}
